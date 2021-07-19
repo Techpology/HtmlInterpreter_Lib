@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace htmlInterpreter.Components
 {
-    public class Object
+    public class Obj
     {
         string Name { get; set; }
-        Object getComponent()
+        Obj getComponent()
         {
             //TODO: getComponent        { Searches through references in object to find a specific type and or name which later gets returned }
-            return new Object();
+            return new Obj();
         }
         void delete()
         {
