@@ -33,7 +33,7 @@ namespace htmlInterpreter
         public Masterpage(string _Path, string _Name = "Untitled")
         {
             Path = _Path;
-            Name = _NamE;
+            Name = _Name;
 
             CreatePreview();
             CreatePage();
