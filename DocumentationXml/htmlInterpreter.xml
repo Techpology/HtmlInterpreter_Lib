@@ -11,7 +11,7 @@
             </summary>
             <param name="_component">The component which was dragged or added to queue</param>
         </member>
-        <member name="M:htmlInterpreter.Components.Masterpage.#ctor">
+        <member name="M:htmlInterpreter.Components.Masterpage.#ctor(System.String,System.String)">
             <summary>
             <para>A custom object that allows the creation of templates for webpages.</para>
             Masterpages are used to set the designs and functionality which will follow all child webpages.
