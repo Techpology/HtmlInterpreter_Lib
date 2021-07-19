@@ -22,10 +22,10 @@ namespace htmlInterpreter.Components
         string getAllLines()
         {
             string alllines = "";
-            using(StreamReader sw = new StreamReader(Path+Name+Extension))
+            using(StreamReader sr = new StreamReader(Path+Name+Extension))
             {
                 string currentline = ""; 
-                while ((currentline = sw.ReadLine())!=null) 
+                while ((currentline = sr.ReadLine())!=null) 
                 {// Loops though all the lines and adds them to a single string
                     currentline += currentline+"\n";
                 }

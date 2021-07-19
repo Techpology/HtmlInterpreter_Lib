@@ -41,6 +41,11 @@
             Loops through given index Id and removes the component from preview and query.
             </summary>
         </member>
+        <member name="M:htmlInterpreter.Components.objF.getAllLines">
+            <summary>
+             Returns all lines in the file as a string
+            </summary>
+        </member>
         <member name="M:htmlInterpreter.Components.ObjectQueue.#ctor">
             <summary>
             Acts as a binding between all objects with data storing needed.
