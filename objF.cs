@@ -33,10 +33,28 @@ namespace htmlInterpreter.Components
             return alllines;
         }
 
+        /// <summary>
+        /// Return the line with the line number corresponding to the index given
+        /// </summary>
+        /// <param name="_index">line number to be returned</param>
         string getLineAtIndex(int _index)
         {
-            //TODO: getLineAtIndex      { Get all lines in current File into a single string }
-            return "";
+            using (StreamReader sr = new StreamReader(Path + Name + Extension))
+            {
+                int lineNum = 0;
+                while (sr.ReadLine()!=null)
+                {
+                    //Checks if the index is the same as the line number
+                    //if that is the case we return the line
+                    if (lineNum == _index)
+                    {
+                        return sr.ReadLine();
+                    }
+                    lineNum++;
+                }
+            }
+            //If the index is outside the the line numbers we return string with value null 
+            return "Null";
         }
     }
 }
