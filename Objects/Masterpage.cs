@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace htmlInterpreter
+namespace htmlInterpreter.Components
 {
     //Id: 50
-    public class Masterpage
+    public class Masterpage : objF
     {
         //Path to create master page at
         string Path;
