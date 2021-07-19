@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.IO.Compression;
 
-namespace htmlInterpreter
+namespace htmlInterpreter.Components
 {
     class Save
     {
@@ -49,7 +49,7 @@ namespace htmlInterpreter
                             test = entry.Name;
                         }
                         Directory.CreateDirectory("F:/newtestFolder/" + "entry/");
-                        File.WriteAllText("F:/newtestFolder/" + "entry/test.txt", test);
+                        System.IO.File.WriteAllText("F:/newtestFolder/" + "entry/test.txt", test);
                     }
                 }
             }

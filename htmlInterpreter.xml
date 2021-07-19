@@ -11,34 +11,69 @@
             </summary>
             <param name="_component">The component which was dragged or added to queue</param>
         </member>
-        <member name="M:htmlInterpreter.Masterpage.#ctor(System.String,System.String)">
+        <member name="M:htmlInterpreter.Components.Masterpage.#ctor">
             <summary>
             <para>A custom object that allows the creation of templates for webpages.</para>
             Masterpages are used to set the designs and functionality which will follow all child webpages.
             </summary>
             <param name="_Path">Project path stored as a string for future exports and caching</param>
         </member>
-        <member name="M:htmlInterpreter.Masterpage.CreatePreview">
+        <member name="M:htmlInterpreter.Components.Masterpage.CreatePreview">
             <summary>
             Creates a preview file used to view the website inside of the editor.
             The preview file is stored in the project solution file.
             </summary>
         </member>
-        <member name="M:htmlInterpreter.Masterpage.CreatePage">
+        <member name="M:htmlInterpreter.Components.Masterpage.CreatePage">
             <summary>
             Creates a webpage of type Master inside the given directory for future export.
             This file is only updated when the user requests to save the project (ctrl+s).
             </summary>
         </member>
-        <member name="M:htmlInterpreter.Masterpage.Add">
+        <member name="M:htmlInterpreter.Components.Masterpage.Add">
             <summary>
             Adds tag into preview html and save query.
             Also assigns index in the form of ID to group multiple components, etc...
             </summary>
         </member>
-        <member name="M:htmlInterpreter.Masterpage.Remove">
+        <member name="M:htmlInterpreter.Components.Masterpage.Remove">
             <summary>
             Loops through given index Id and removes the component from preview and query.
+            </summary>
+        </member>
+        <member name="M:htmlInterpreter.Components.ObjectQueue.#ctor">
+            <summary>
+            Acts as a binding between all objects with data storing needed.
+            <para>
+            In general, you would want to use that after a certain process had been triggered which in return needed data storing
+            </para>
+            </summary>
+        </member>
+        <member name="M:htmlInterpreter.Components.ObjectQueue.AddToQueue(System.String,htmlInterpreter.Components.Masterpage)">
+            <summary>
+            Choose type of object to add to queue, later you can use the save queue function to store
+            the requested data.
+            </summary>
+            <param name="type">Masterpage, Webpage, </param> //fill this with all possible types.
+        </member>
+        <member name="M:htmlInterpreter.Components.ObjectQueue.AddToPreviewQueue(System.String,htmlInterpreter.Components.Masterpage)">
+            <summary>
+            Choose type of object to add to preview queue, later you can use the save queue function to store
+            the requested data.
+            <para>You can also use the update preview to update preview file directly instead of updating its meta temp file.</para>
+            </summary>
+            <param name="type">Masterpage, Webpage, </param> //fill this with all possible types.
+        </member>
+        <member name="M:htmlInterpreter.Components.ObjectQueue.ClearQueue(System.Collections.Generic.List{htmlInterpreter.Components.Masterpage})">
+            <summary>
+            Takes in a list as an argument and clears it inside of this main scripts.
+            <para>Used to clear queues simpler and better.</para>
+            </summary>
+            <param name="listObj">A object which is part of the ObjectQueue being used. (ObjectQueue.list)</param>
+        </member>
+        <member name="M:htmlInterpreter.Components.ObjectQueue.WriteToSolution(System.String)">
+            <summary>
+            Takes all standard queues and assigns them to the right slot in the save method.
             </summary>
         </member>
         <member name="M:htmlInterpreter.CreateSolution.writeSolution">
@@ -49,41 +84,6 @@
         <member name="M:htmlInterpreter.CreateSolution.setDirectories_Solution">
             <summary>
             standard[TpVWC] directories inside of the solution in compressed format.
-            </summary>
-        </member>
-        <member name="M:htmlInterpreter.ObjectQueue.#ctor">
-            <summary>
-            Acts as a binding between all objects with data storing needed.
-            <para>
-            In general, you would want to use that after a certain process had been triggered which in return needed data storing
-            </para>
-            </summary>
-        </member>
-        <member name="M:htmlInterpreter.ObjectQueue.AddToQueue(System.String,htmlInterpreter.Masterpage)">
-            <summary>
-            Choose type of object to add to queue, later you can use the save queue function to store
-            the requested data.
-            </summary>
-            <param name="type">Masterpage, Webpage, </param> //fill this with all possible types.
-        </member>
-        <member name="M:htmlInterpreter.ObjectQueue.AddToPreviewQueue(System.String,htmlInterpreter.Masterpage)">
-            <summary>
-            Choose type of object to add to preview queue, later you can use the save queue function to store
-            the requested data.
-            <para>You can also use the update preview to update preview file directly instead of updating its meta temp file.</para>
-            </summary>
-            <param name="type">Masterpage, Webpage, </param> //fill this with all possible types.
-        </member>
-        <member name="M:htmlInterpreter.ObjectQueue.ClearQueue(System.Collections.Generic.List{htmlInterpreter.Masterpage})">
-            <summary>
-            Takes in a list as an argument and clears it inside of this main scripts.
-            <para>Used to clear queues simpler and better.</para>
-            </summary>
-            <param name="listObj">A object which is part of the ObjectQueue being used. (ObjectQueue.list)</param>
-        </member>
-        <member name="M:htmlInterpreter.ObjectQueue.WriteToSolution(System.String)">
-            <summary>
-            Takes all standard queues and assigns them to the right slot in the save method.
             </summary>
         </member>
     </members>

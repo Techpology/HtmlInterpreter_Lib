@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace htmlInterpreter.Components
 {
-    class Object
+    public class Object
     {
         string Name { get; set; }
         Object getComponent()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace htmlInterpreter.Components
 {
-    class File : Object
+    public class File : Object
     {
         string Path { get; set; }
         string Type { get; set; }

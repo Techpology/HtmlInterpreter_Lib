@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace htmlInterpreter
+namespace htmlInterpreter.Components
 {
     //Id: 60
     //*2 https://drive.google.com/file/d/1iDDpEIJBPt0Da-TqN9ydf3dytj86inI8/view?usp=sharing
