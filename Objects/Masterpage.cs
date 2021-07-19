@@ -4,34 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace htmlInterpreter.Components
+namespace htmlInterpreter
 {
     //Id: 50
-    public class Masterpage : File
+    public class Masterpage
     {
         //Path to create master page at
-        public string Path { get; set; }
-        public string Name { get; set; }
+        string Path;
+        public string Name;
         //Framework
 
         //PreviewFiles
-        public string PreviewPath { get; set; }
-        public string PreviewTagJsonPath { get; set; }
-        public string PreviewCssPath { get; set; }
-        public string PreviewJsPath { get; set; }
+        public string PreviewPath;
+        public string PreviewTagJsonPath;
+        public string PreviewCssPath;
+        public string PreviewJsPath;
         //StandardFiles
-        public string StandardPath { get; set; }
-        public string TagJsonPath { get; set; }
-        public string CssPath { get; set; }
-        public string JsPath { get; set; }
+        public string StandardPath;
+        public string TagJsonPath;
+        public string CssPath;
+        public string JsPath;
 
         /// <summary>
         /// <para>A custom object that allows the creation of templates for webpages.</para>
         /// Masterpages are used to set the designs and functionality which will follow all child webpages.
         /// </summary>
         /// <param name="_Path">Project path stored as a string for future exports and caching</param>
-        public Masterpage()
+        public Masterpage(string _Path, string _Name = "Untitled")
         {
+            Path = _Path;
+            Name = _NamE;
+
             CreatePreview();
             CreatePage();
         }
@@ -64,9 +67,9 @@ namespace htmlInterpreter.Components
         /// Adds tag into preview html and save query.
         /// Also assigns index in the form of ID to group multiple components, etc...
         /// </summary>
-        public virtual void Add()
+        public void Add()
         {
-            
+
         }
 
         /// <summary>
