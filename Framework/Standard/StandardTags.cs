@@ -24,9 +24,4 @@ namespace htmlInterpreter.Components
         // into the script from child to parent, meaning no issues when it comes to subtree, etc... (child nodes who are internal nodes) (internal nodes = contain children)
         public override string ToString() => $"<{tagName} Style=\"{Style}\" Class=\"{Class}\" Id=\"{Id}\" src=\"{Src}\" href=\"{href}\">";
     }
-
-    class StandardTags : Obj
-    {
-
-    }
 }
