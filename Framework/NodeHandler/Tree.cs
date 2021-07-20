@@ -10,13 +10,15 @@ namespace htmlInterpreter.Components
     {
         public Node(Tag _tag, List<Node> _Children)
         {
+            ID = null;
             childID = 0;
             tag = _tag;
             Children = _Children;
             childrenMap = new Dictionary<string, Node>();
         }
 
-        int childID;
+        public string ID;
+        int childID;                                // The start offset number for children id
         public Tag tag  {get; set;}                 // Struct Tag is a standard type of tags with a set of data needed or usable for respective node.
         public List<Node> Children  {get; set;}     // List of children contained with in the node. (Also are seperate nodes (children))
 
@@ -28,7 +30,8 @@ namespace htmlInterpreter.Components
         // We insert a new child and add it to the dictionary with id from (string)incrementID().
         public void insert(Node _Child)
         {
-            childrenMap.Add(incrementId(), _Child);
+            _Child.ID = incrementId();
+            childrenMap.Add(childID.ToString(), _Child);
             updateChildren();
         }
 
@@ -59,7 +62,7 @@ namespace htmlInterpreter.Components
     class Tree : Obj
     {
         // Create a root Node which will contain the root tree on instance decleration.
-        Node root;
+        public Node root;
 
         //Create root node on first call.
         public Tree(Tag _tag = new Tag(), List<Node> _Children = null)

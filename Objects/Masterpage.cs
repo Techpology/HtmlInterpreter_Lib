@@ -25,6 +25,9 @@ namespace htmlInterpreter.Components
         public string CssPath;
         public string JsPath;
 
+        //Functionality
+        Tree tree;
+
         /// <summary>
         /// <para>A custom object that allows the creation of templates for webpages.</para>
         /// Masterpages are used to set the designs and functionality which will follow all child webpages.
@@ -34,6 +37,8 @@ namespace htmlInterpreter.Components
         {
             Path = _Path;
             Name = _Name;
+
+            tree = new Tree();
 
             CreatePreview();
             CreatePage();
@@ -67,17 +72,20 @@ namespace htmlInterpreter.Components
         /// Adds tag into preview html and save query.
         /// Also assigns index in the form of ID to group multiple components, etc...
         /// </summary>
-        public void Add()
+        public void Add(Node _toAdd)
         {
-
+            tree.root.insert(_toAdd);
         }
 
         /// <summary>
-        /// Loops through given index Id and removes the component from preview and query.
+        /// Removes argument (Node) from its parent at the given ID relative to its parent.
+        /// <para>
+        /// To properly remove a node from parent of none root file type, use parent.remove(child.id) where both parent and child are of type (Node).
+        /// </para>
         /// </summary>
-        public void Remove()
+        public void Remove(Node _toRemove)
         {
-
+            tree.root.remove(_toRemove.ID);
         }
     }
 }

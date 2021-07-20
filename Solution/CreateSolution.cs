@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.IO;
 using System.IO.Compression;
 
+using htmlInterpreter.Debug;
+
 namespace htmlInterpreter
 {
     //Id: 40
@@ -15,6 +17,8 @@ namespace htmlInterpreter
         string Path;
         string ProjectName;
         string Extension;
+
+        Debuger debuger;
 
         public CreateSolution(string _Path, string _ProjectName, string _Extension)
         {
@@ -31,8 +35,11 @@ namespace htmlInterpreter
         /// </summary>
         private void writeSolution()
         {
+            debuger.Log("Writing to solution");
             GZipStream zipOut = new GZipStream(File.OpenWrite(Path), CompressionMode.Compress);
+            debuger.Log("Wrote to solution, closing");
             zipOut.Close();
+            debuger.Log("Closed succesfully. Setting directories in solution");
             //Creates standard[TpVWC] directories inside of the solution
             setDirectories_Solution();
         }
@@ -52,6 +59,7 @@ namespace htmlInterpreter
                 //Creates a ziparchive which allows us to write files in compressed format to solution.
                 using(ZipArchive archive = new ZipArchive(openSolution, ZipArchiveMode.Update))
                 {
+                    debuger.Log("Writing files and directories (proj.json, EditorUI/, Pages/)");
                     //Creates directories [EditorUI, and Pages] inside of the solution in compressed format.
                     ZipArchiveEntry projJson = archive.CreateEntry("Proj.json");
                     ZipArchiveEntry dir_EditorUI = archive.CreateEntry("EditorUI/");

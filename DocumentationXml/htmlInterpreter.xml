@@ -30,15 +30,18 @@
             This file is only updated when the user requests to save the project (ctrl+s).
             </summary>
         </member>
-        <member name="M:htmlInterpreter.Components.Masterpage.Add">
+        <member name="M:htmlInterpreter.Components.Masterpage.Add(htmlInterpreter.Components.Node)">
             <summary>
             Adds tag into preview html and save query.
             Also assigns index in the form of ID to group multiple components, etc...
             </summary>
         </member>
-        <member name="M:htmlInterpreter.Components.Masterpage.Remove">
+        <member name="M:htmlInterpreter.Components.Masterpage.Remove(htmlInterpreter.Components.Node)">
             <summary>
-            Loops through given index Id and removes the component from preview and query.
+            Removes argument (Node) from its parent at the given ID relative to its parent.
+            <para>
+            To properly remove a node from parent of none root file type, use parent.remove(child.id) where both parent and child are of type (Node).
+            </para>
             </summary>
         </member>
         <member name="M:htmlInterpreter.Components.objF.getAllLines">
