@@ -26,7 +26,8 @@ namespace htmlInterpreter.Components
         public string JsPath;
 
         //Functionality
-        Tree tree;
+        public Tree tree;
+        List<Node> children;
 
         /// <summary>
         /// <para>A custom object that allows the creation of templates for webpages.</para>
@@ -38,7 +39,9 @@ namespace htmlInterpreter.Components
             Path = _Path;
             Name = _Name;
 
-            tree = new Tree();
+            children = new List<Node>();
+            Tag t = new Tag();
+            tree = new Tree(t, children);
 
             CreatePreview();
             CreatePage();

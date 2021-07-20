@@ -8,12 +8,12 @@ namespace htmlInterpreter.Components
 {
     public struct Node      // This defines a node structure which will exist through out the tree data structure
     {
-        public Node(Tag _tag, List<Node> _Children)
+        public Node(Tag _tag, List<Node> _Children = null)
         {
             ID = null;
             childID = 0;
             tag = _tag;
-            Children = _Children;
+            Children = (_Children == null) ? new List<Node>() : _Children;
             childrenMap = new Dictionary<string, Node>();
         }
 
@@ -59,7 +59,7 @@ namespace htmlInterpreter.Components
         }
     }
 
-    class Tree : Obj
+    public class Tree : Obj
     {
         // Create a root Node which will contain the root tree on instance decleration.
         public Node root;
