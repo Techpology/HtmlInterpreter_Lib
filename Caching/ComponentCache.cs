@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace htmlInterpreter
 {
     //Id: 20
-    //*2 https://drive.google.com/file/d/1isbaNi8V5JksCGyVtwIgzynncEWxV4cl/view?usp=sharing
+    //*2 https://drive.google.com/file/d/1isbaNi8V5JksCGyVtwIgzynncEWxV4cl/view?usp=sharing {DEPRICATED}
+    [Obsolete("ComponentCache is depricated. It was part of the old system of caching which has now been replaced by ()")]
     public class ComponentCache
     {
         //Component which was added. [draggable]

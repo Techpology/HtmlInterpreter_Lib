@@ -8,6 +8,5 @@ namespace htmlInterpreter
 {
     class PagePreview
     {
-        
     }
 }
