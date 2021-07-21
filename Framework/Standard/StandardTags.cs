@@ -22,6 +22,6 @@ namespace htmlInterpreter.Components
         // The string is then returned to the node when needed. And the children nodes tag strings are also returned in to the respective root tag.
         // To properly create the objects into proper strings, we need to use {POST-ORDER TRAVERSEL} manner which in return creates the tags
         // into the script from child to parent, meaning no issues when it comes to subtree, etc... (child nodes who are internal nodes) (internal nodes = contain children)
-        public override string ToString() => $"<{tagName} Style=\"{Style}\" Class=\"{Class}\" Id=\"{Id}\" src=\"{Src}\" href=\"{href}\">";
+        public override string ToString() => $"<{tagName} Style=\"{Style}\" Class=\"{Class}\" Id=\"{Id}\" src=\"{Src}\" href=\"{href}\">{Text}";
     }
 }

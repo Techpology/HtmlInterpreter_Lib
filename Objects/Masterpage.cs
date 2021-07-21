@@ -40,8 +40,9 @@ namespace htmlInterpreter.Components
             Name = _Name;
 
             children = new List<Node>();
-            Tag t = new Tag();
-            tree = new Tree(t, children);
+            Tag T_html = new Tag();
+            T_html.tagName = "html";
+            tree = new Tree(T_html, children);
 
             CreatePreview();
             CreatePage();
