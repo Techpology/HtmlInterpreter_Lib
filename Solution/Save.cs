@@ -83,6 +83,8 @@ namespace htmlInterpreter.Components
                 {
                     //Creates directories [EditorUI, and Pages] inside of the solution in compressed format.
                     ZipArchiveEntry dir_PreviewPage = archive.GetEntry(_path);
+                    dir_PreviewPage.Delete();
+                    dir_PreviewPage = archive.CreateEntry(_path);
                     using(StreamWriter writer = new StreamWriter(dir_PreviewPage.Open()))
                     {
                         writer.BaseStream.Seek(0, SeekOrigin.End);
