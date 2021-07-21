@@ -8,16 +8,14 @@ using System.IO.Compression;
 
 namespace htmlInterpreter.Components
 {
-    class Save
+    public static class Save
     {
         //Project solution path
-        string path;
-        public Save(string _path)
-        {
-            path = _path;
-        }
+        static string path = "";
+        static string solutionName = "";
+        static string solutionExtension = "";
 
-        public void Save_Masterpage(List<Masterpage> Queue)
+        public static void Save_Masterpage(List<Masterpage> Queue)
         {
             //Write to solution as [.m.html] file
             foreach (Masterpage mp in Queue)
@@ -55,12 +53,12 @@ namespace htmlInterpreter.Components
             }
         }
 
-        public void Save_PreviewMasterPage(List<Masterpage> Queue)
+        public static void Save_PreviewMasterPage(List<Masterpage> Queue)
         {
             foreach (Masterpage mp in Queue)
             {
                 //Specifies the solution file that we are trying to manipulate.
-                using (FileStream openSolution = new FileStream(path, FileMode.Open))
+                using (FileStream openSolution = new FileStream(path + solutionName + solutionExtension, FileMode.Open))
                 {
                     //Creates a ziparchive which allows us to write files in compressed format to solution.
                     using (ZipArchive archive = new ZipArchive(openSolution, ZipArchiveMode.Update))
@@ -75,7 +73,25 @@ namespace htmlInterpreter.Components
             }
         }
 
-
+        public static void Save_intoPreview(Object _Package, string _path)
+        {
+            //Specifies the solution file that we are trying to manipulate.
+            using (FileStream openSolution = new FileStream(path +solutionName + solutionExtension, FileMode.Open))
+            {
+                //Creates a ziparchive which allows us to write files in compressed format to solution.
+                using (ZipArchive archive = new ZipArchive(openSolution, ZipArchiveMode.Update))
+                {
+                    //Creates directories [EditorUI, and Pages] inside of the solution in compressed format.
+                    ZipArchiveEntry dir_PreviewPage = archive.GetEntry(_path);
+                    using(StreamWriter writer = new StreamWriter(dir_PreviewPage.Open()))
+                    {
+                        writer.BaseStream.Seek(0, SeekOrigin.End);
+                        writer.WriteLine((string)_Package);
+                    }
+                    dir_PreviewPage.LastWriteTime = DateTimeOffset.UtcNow.LocalDateTime;
+                }
+            }
+        }
 
     }
 }
