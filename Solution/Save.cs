@@ -11,9 +11,9 @@ namespace htmlInterpreter.Components
     public static class Save
     {
         //Project solution path
-        static string path = "";
-        static string solutionName = "";
-        static string solutionExtension = "";
+        public static string path = "";
+        public static string solutionName = "";
+        public static string solutionExtension = "";
 
         public static void Save_Masterpage(List<Masterpage> Queue)
         {

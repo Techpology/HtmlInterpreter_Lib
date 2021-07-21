@@ -85,11 +85,6 @@
             </summary>
             <param name="listObj">A object which is part of the ObjectQueue being used. (ObjectQueue.list)</param>
         </member>
-        <member name="M:htmlInterpreter.Components.ObjectQueue.WriteToSolution(System.String)">
-            <summary>
-            Takes all standard queues and assigns them to the right slot in the save method.
-            </summary>
-        </member>
         <member name="M:htmlInterpreter.CreateSolution.writeSolution">
             <summary>
             <para>Creates a solution file at Path</para>
