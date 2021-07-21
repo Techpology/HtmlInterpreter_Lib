@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace htmlInterpreter.Components
 {
     //Id: 60
     //*2 https://drive.google.com/file/d/1iDDpEIJBPt0Da-TqN9ydf3dytj86inI8/view?usp=sharing
+    [Obsolete("Depricated, use ObjQ")]
     public class ObjectQueue
     {
         public List<Masterpage> MasterpageQueue; //The only reason it's public is to use it as an argument when clearing queue
@@ -74,7 +76,7 @@ namespace htmlInterpreter.Components
         /// <summary>
         /// Takes all standard queues and assigns them to the right slot in the save method.
         /// </summary>
-        public void WriteToSolution(string path)
+        /*public void WriteToSolution(string path)
         {
             //Write to save
             Save save = new Save(path);
@@ -87,7 +89,7 @@ namespace htmlInterpreter.Components
             Save save = new Save(path);
 
             save.Save_PreviewMasterPage(MasterpagePreviewQueue);
-        }
+        }*/
 
     }
 }
