@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.IO.Compression;
+using System.Reflection;
 
 namespace htmlInterpreter.Components
 {
@@ -95,5 +96,43 @@ namespace htmlInterpreter.Components
             }
         }
 
+        // Standard solution layout
+        //      -Pages
+        //          -Preview    *On update (Realtime)
+        //              -PageNames[]->(Files)
+        //          -Main       *On start (Saved data)
+        //              -PageNames[]->(Files)
+        // Extracts solution to same directory, deletes solution, copies previews to main, recompresses directory
+        public static void Save_FromPreview()
+        {
+            using(FileStream openSolution = new FileStream(path + solutionName + solutionExtension, FileMode.Open))
+            {
+                using(ZipArchive archive = new ZipArchive(openSolution, ZipArchiveMode.Update))
+                {
+                    // Creating folder to extract file to from zip
+                    Directory.CreateDirectory($"{path}/{solutionName}");
+                    // Extracting files from zip to directory
+                    archive.ExtractToDirectory($"{path}/{solutionName}");
+                }
+            }
+
+            // Delete zip
+            File.Delete(path + solutionName + solutionExtension);
+
+            // Copy files in preview folder in to a new folder named main in the same directory as the preview folder
+            if (!Directory.Exists($"{path}/{solutionName}/Pages/Main"))
+            {
+                Directory.CreateDirectory($"{path}/{solutionName}/Pages/Main");
+            }
+
+            foreach (var file in Directory.GetFiles($"{path}/{solutionName}/Pages/Preview"))
+            {
+                File.Copy(file, $"{path}/{solutionName}/Pages/Main",true);
+            }
+
+            // Compress directory to zip form again
+            ZipFile.CreateFromDirectory($"{path}/{solutionName}", $"{path}/{solutionName}{solutionExtension}", CompressionLevel.Fastest, false);
+
+        }
     }
 }
