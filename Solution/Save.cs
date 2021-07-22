@@ -112,7 +112,7 @@ namespace htmlInterpreter.Components
                     // Creating folder to extract file to from zip
                     Directory.CreateDirectory($"{path}/{solutionName}");
                     // Extracting files from zip to directory
-                    archive.ExtractToDirectory($"{path}/{solutionName}");
+                    archive.ExtractToDirectory($"{path}/{solutionName}", true);
                 }
             }
 
@@ -125,14 +125,32 @@ namespace htmlInterpreter.Components
                 Directory.CreateDirectory($"{path}/{solutionName}/Pages/Main");
             }
 
-            foreach (var file in Directory.GetFiles($"{path}/{solutionName}/Pages/Preview"))
+            foreach (var file in Directory.GetDirectories($"{path}/{solutionName}/Pages/Preview/"))
             {
-                File.Copy(file, $"{path}/{solutionName}/Pages/Main",true);
+                Directory.CreateDirectory($"{path}/{solutionName}/Pages/Main/{new DirectoryInfo(file).Name}");
+                foreach (var item in Directory.GetFiles(file))
+                {
+                    using (FileStream transporting = File.Create($"{path}/{solutionName}/Pages/Main/{new DirectoryInfo(file).Name}/{new FileInfo(item).Name}"))
+                    {
+                        StreamReader read = new StreamReader(item);
+
+                        string content = read.ReadToEnd();
+                        byte[] copying = new UTF8Encoding(true).GetBytes(content);
+                        transporting.Write(copying, 0, copying.Length);
+
+                        transporting.Flush();
+                        transporting.Dispose();
+                        transporting.Close();
+                        read.Close();
+                    }
+                }
             }
 
             // Compress directory to zip form again
             ZipFile.CreateFromDirectory($"{path}/{solutionName}", $"{path}/{solutionName}{solutionExtension}", CompressionLevel.Fastest, false);
 
+            // Deleting temp folder
+            Directory.Delete($"{path}/{solutionName}", true);
         }
     }
 }
