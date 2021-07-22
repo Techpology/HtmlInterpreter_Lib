@@ -19,7 +19,7 @@ namespace htmlInterpreter
         /// <para>A caching system which uses json temp files to store components data instead of saving all data to memmory.</para>
         /// Works faster with more complex designs and allows for easier project integration later on as well
         /// </summary>
-        /// <param name="_component">The component which was dragged or added to queue</param>
+        /// <param name="_Component">The component which was dragged or added to queue</param>
         public ComponentCache(Object _Component)
         {
             Component = _Component;

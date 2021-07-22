@@ -73,10 +73,11 @@ namespace htmlInterpreter.Components
             listObj.Clear();
         }
 
+        /*
         /// <summary>
         /// Takes all standard queues and assigns them to the right slot in the save method.
         /// </summary>
-        /*public void WriteToSolution(string path)
+        public void WriteToSolution(string path)
         {
             //Write to save
             Save save = new Save(path);
