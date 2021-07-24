@@ -14,17 +14,18 @@ namespace htmlInterpreter.Compiler
         public Dictionary<string, Type> LGrammar { get; set; }
 
         public string regularGrammarFile_Name { get; set; } // File name and extension of the regular grammar file
-        public string regularGrammarFile_Path { get; set; } // Can be changed for different grammar set (same syntax)
+        public Stream regularGrammarFile_Path { get; set; } // Can be changed for different grammar set (same syntax)
 
         // Constructor
         public HTMLi_Lgrammar()
         {
             LGrammar = new Dictionary<string, Type>();
 
-            regularGrammarFile_Name = "regularGrammar.txt";
+            regularGrammarFile_Name = "regularGrammar";
             // Getting relative path to class of regularGrammar.txt [1^]
-            regularGrammarFile_Path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            regularGrammarFile_Path += $"/{regularGrammarFile_Name}";
+            var asm = Assembly.GetExecutingAssembly();
+            regularGrammarFile_Path = asm.GetManifestResourceStream(regularGrammarFile_Name);
+            //regularGrammarFile_Path = @$"Resources\{regularGrammarFile_Name}";
         }
 
         // Deconstructor
@@ -40,7 +41,7 @@ namespace htmlInterpreter.Compiler
             // Read regular grammar file
             using (StreamReader sr = new StreamReader(regularGrammarFile_Path))
             {
-                while ((currentLineContent = sr.ReadLine()) != null)
+                while ((currentLineContent = sr.ReadLine().ToString()) != null)
                 {
                     string[] key_Val = currentLineContent.Split(',');
 

@@ -9,7 +9,21 @@
             <para>A caching system which uses json temp files to store components data instead of saving all data to memmory.</para>
             Works faster with more complex designs and allows for easier project integration later on as well
             </summary>
-            <param name="_component">The component which was dragged or added to queue</param>
+            <param name="_Component">The component which was dragged or added to queue</param>
+        </member>
+        <member name="M:htmlInterpreter.Compiler.HTOC.fileLinesToArr(System.String)">
+            <summary>
+            Run this method before parsing. It sets all lines in file to a list, needed for parsing
+            </summary>
+            <param name="_path">Path to file</param>
+            <returns></returns>
+        </member>
+        <member name="M:htmlInterpreter.Compiler.HTOC.compileToNode(System.Collections.Generic.List{System.String})">
+            <summary>
+            Use a loop based on the length of the list supplied from fileLinesToArr() [line(42)]
+            </summary>
+            <param name="_lines"></param>
+            <returns></returns>
         </member>
         <member name="M:htmlInterpreter.Components.Masterpage.#ctor(System.String,System.String)">
             <summary>
@@ -84,6 +98,50 @@
             <para>Used to clear queues simpler and better.</para>
             </summary>
             <param name="listObj">A object which is part of the ObjectQueue being used. (ObjectQueue.list)</param>
+        </member>
+        <member name="T:htmlInterpreter.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:htmlInterpreter.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:htmlInterpreter.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:htmlInterpreter.Properties.Resources.regularGrammar">
+             <summary>
+               Looks up a localized string similar to html,s
+            head,s
+            body,s
+            footer,s
+            div,s
+            h1,s
+            h2,s
+            h3,s
+            h4,s
+            h5,s
+            p,s
+            style,s
+            class,s.
+             </summary>
+        </member>
+        <member name="P:htmlInterpreter.Properties.Resources.regularGrammar_txt">
+            <summary>
+              Looks up a localized string similar to Compiler/regularGrammar.txt.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:htmlInterpreter.Properties.Resources.syntaxGrammar" -->
+        <member name="P:htmlInterpreter.Properties.Resources.syntaxGrammar_txt">
+            <summary>
+              Looks up a localized string similar to Compiler/syntaxGrammar.txt.
+            </summary>
         </member>
         <member name="M:htmlInterpreter.CreateSolution.writeSolution">
             <summary>

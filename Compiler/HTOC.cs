@@ -29,7 +29,7 @@ namespace htmlInterpreter.Compiler
             get_syntaxGrammar.setSyntaxGrammar();           // Set syntax
         }
 
-        static string toHex(char a)
+        public static string toHex(char a)
         {
             return Convert.ToByte(a).ToString();
         }
@@ -39,7 +39,7 @@ namespace htmlInterpreter.Compiler
         /// </summary>
         /// <param name="_path">Path to file</param>
         /// <returns></returns>
-        static List<string> fileLinesToArr(string _path)
+        public static List<string> fileLinesToArr(string _path)
         {
             List<string> lines = new List<string>();
             int count = 0;
@@ -64,7 +64,7 @@ namespace htmlInterpreter.Compiler
         /// </summary>
         /// <param name="_lines"></param>
         /// <returns></returns>
-        static Node compileToNode(List<string> _lines)
+        public static Node compileToNode(List<string> _lines)
         {
             // A set of instruction values
             bool start = false;
@@ -98,10 +98,10 @@ namespace htmlInterpreter.Compiler
                         if (get_syntaxGrammar.syntaxGrammar.ContainsKey(L.ToString()))
                         {
                             string t = executeInstruction(get_syntaxGrammar.syntaxGrammar.GetValueOrDefault(L.ToString()));
-                            start = (t == "start") ? true : false;
-                            stop = (t == "stop") ? true : false;
-                            op_eq = (t == "op_eq") ? true : false;
-                            op_str = (t == "op_str") ? true : false;
+                            start = (t == "start");
+                            stop = (t == "stop");
+                            op_eq = (t == "op_eq");
+                            op_str = (t == "op_str");
                         }
                     }
                     else if (start && !op_eq && !op_str && !isInstruct(L) && setType)
@@ -128,10 +128,10 @@ namespace htmlInterpreter.Compiler
                         if (get_syntaxGrammar.syntaxGrammar.ContainsKey(L.ToString()))
                         {
                             string t = executeInstruction(get_syntaxGrammar.syntaxGrammar.GetValueOrDefault(L.ToString()));
-                            start = (t == "start") ? true : false;
-                            stop = (t == "stop") ? true : false;
-                            op_eq = (t == "op_eq") ? true : false;
-                            op_str = (t == "op_str") ? true : false;
+                            start = (t == "start");
+                            stop = (t == "stop");
+                            op_eq = (t == "op_eq");
+                            op_str = (t == "op_str");
                         }
                     }
                     else if (start && op_eq && !op_str && isInstruct(L) && !setType && setArg) // start argVal
@@ -139,12 +139,12 @@ namespace htmlInterpreter.Compiler
                         if (get_syntaxGrammar.syntaxGrammar.ContainsKey(L.ToString()))
                         {
                             string t = executeInstruction(get_syntaxGrammar.syntaxGrammar.GetValueOrDefault(L.ToString()));
-                            start = (t == "start") ? true : false;
-                            stop = (t == "stop") ? true : false;
-                            op_eq = (t == "op_eq") ? true : false;
-                            op_str = (t == "op_str") ? true : false;
+                            start = (t == "start");
+                            stop = (t == "stop");
+                            op_eq = (t == "op_eq");
+                            op_str = (t == "op_str");
 
-                            setArg = (op_str) ? false : true;
+                            setArg = (!op_str);
                         }
                     }
                     else if (start && op_eq && op_str && !isInstruct(L) && !setType && !setArg) // set argVal
@@ -159,12 +159,12 @@ namespace htmlInterpreter.Compiler
                         if (get_syntaxGrammar.syntaxGrammar.ContainsKey(L.ToString()))
                         {
                             string t = executeInstruction(get_syntaxGrammar.syntaxGrammar.GetValueOrDefault(L.ToString()));
-                            start = (t == "start") ? true : false;
-                            stop = (t == "stop") ? true : false;
-                            op_eq = (t == "op_eq") ? true : false;
-                            op_str = (t == "op_str") ? false : true;
+                            start = (t == "start");
+                            stop = (t == "stop");
+                            op_eq = (t == "op_eq");
+                            op_str = (t != "op_str");
 
-                            setArg = (op_str) ? false : true;
+                            setArg = (!op_str);
                         }
                     }
                     else if(isInstruct(L) && start && !stop && !op_eq && !op_str && !setType && !setArg)
@@ -172,12 +172,12 @@ namespace htmlInterpreter.Compiler
                         if (get_syntaxGrammar.syntaxGrammar.ContainsKey(L.ToString()))
                         {
                             string t = executeInstruction(get_syntaxGrammar.syntaxGrammar.GetValueOrDefault(L.ToString()));
-                            start = (t == "start") ? true : false;
-                            stop = (t == "stop") ? true : false;
-                            op_eq = (t == "op_eq") ? true : false;
-                            op_str = (t == "op_str") ? true : false;
+                            start = (t == "start");
+                            stop = (t == "stop");
+                            op_eq = (t == "op_eq");
+                            op_str = (t == "op_str");
 
-                            setArg = (op_str) ? false : true;
+                            setArg = (!op_str);
                         }
                     }
                 }
@@ -209,7 +209,7 @@ namespace htmlInterpreter.Compiler
         static Tag TagCompiling;
         static Node NodeCompiling;
 
-        static string executeInstruction(string _instructNum, string arg = "")
+        public static string executeInstruction(string _instructNum, string arg = "")
         {
             switch (_instructNum)
             {

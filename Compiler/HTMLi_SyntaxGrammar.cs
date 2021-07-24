@@ -19,8 +19,7 @@ namespace htmlInterpreter.Compiler
             syntaxGrammar = new Dictionary<string, string>();
 
             syntaxGrammar_Name = "syntaxGrammar.txt";
-            syntaxGrammar_Path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            syntaxGrammar_Path += $"/{syntaxGrammar_Name}";
+            syntaxGrammar_Path += @$"Resources\{syntaxGrammar_Name}";
         }
 
         ~HTMLi_SyntaxGrammar()

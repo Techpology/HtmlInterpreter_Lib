@@ -4,7 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <Copyright></Copyright>
     <Version>1.0.0</Version>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Ali Al Rashini</Authors>
     <Company>Techpology</Company>
     <Product>htmlLibrary</Product>
@@ -20,9 +20,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Compiler\regularGrammar.txt">
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

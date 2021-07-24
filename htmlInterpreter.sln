@@ -8,6 +8,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AE60F7A8-6B86-4C74-A341-FBA2610CA4CD}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		regularGrammar.txt = regularGrammar.txt
+		syntaxGrammar.txt = syntaxGrammar.txt
 	EndProjectSection
 EndProject
 Global
