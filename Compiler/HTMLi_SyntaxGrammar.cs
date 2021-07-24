@@ -12,14 +12,24 @@ namespace htmlInterpreter.Compiler
     {
         public Dictionary<string, string> syntaxGrammar { get; set; }
         public string syntaxGrammar_Name { get; set; }
-        public string syntaxGrammar_Path { get; set; }
+        public Stream syntaxGrammar_Path { get; set; }
 
         public HTMLi_SyntaxGrammar()
         {
             syntaxGrammar = new Dictionary<string, string>();
 
-            syntaxGrammar_Name = "syntaxGrammar.txt";
-            syntaxGrammar_Path += @$"Resources\{syntaxGrammar_Name}";
+            try
+            {
+                syntaxGrammar_Name = "htmlInterpreter.Properties.Resources.resources.syntaxGrammar.txt";
+                var asm = Assembly.GetExecutingAssembly();
+                syntaxGrammar_Path = asm.GetManifestResourceStream(asm.GetManifestResourceNames().Single(file => file.EndsWith(syntaxGrammar_Name)));
+            }
+            catch (Exception e)
+            {
+                Debug.Debuger.Log(e.Message);
+                throw;
+            }
+            //syntaxGrammar_Path += @$"Resources\{syntaxGrammar_Name}";
         }
 
         ~HTMLi_SyntaxGrammar()
@@ -33,7 +43,7 @@ namespace htmlInterpreter.Compiler
             string CurrentLine;
             using (StreamReader sr = new StreamReader(syntaxGrammar_Path))
             {
-                while ((CurrentLine = sr.ReadLine()) != null)
+                while ((CurrentLine = sr.ReadLine().ToString()) != null)
                 {
                     string[] key_val = CurrentLine.Split(" ");
 

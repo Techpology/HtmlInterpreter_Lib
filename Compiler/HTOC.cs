@@ -16,7 +16,7 @@ namespace htmlInterpreter.Compiler
     public static class HTOC
     {
         // Create a dictionary with <string(key), Type(Value[int,string,char,etc...])>
-        static HTMLi_Lgrammar get_regularGrammar;
+        public static HTMLi_Lgrammar get_regularGrammar;
         // Create a dictionary with <string(key), string(value[instruction])>
         static HTMLi_SyntaxGrammar get_syntaxGrammar;
 
@@ -26,7 +26,7 @@ namespace htmlInterpreter.Compiler
             get_regularGrammar.setLGrammar();               // Set grammar
 
             get_syntaxGrammar = new HTMLi_SyntaxGrammar();
-            get_syntaxGrammar.setSyntaxGrammar();           // Set syntax
+            //get_syntaxGrammar.setSyntaxGrammar();           // Set syntax
         }
 
         public static string toHex(char a)

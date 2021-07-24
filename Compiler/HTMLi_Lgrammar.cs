@@ -8,7 +8,7 @@ using System.IO;
 
 namespace htmlInterpreter.Compiler
 {
-    class HTMLi_Lgrammar
+    public class HTMLi_Lgrammar
     {
         // Grammar dictionary
         public Dictionary<string, Type> LGrammar { get; set; }
@@ -21,10 +21,18 @@ namespace htmlInterpreter.Compiler
         {
             LGrammar = new Dictionary<string, Type>();
 
-            regularGrammarFile_Name = "regularGrammar";
-            // Getting relative path to class of regularGrammar.txt [1^]
-            var asm = Assembly.GetExecutingAssembly();
-            regularGrammarFile_Path = asm.GetManifestResourceStream(regularGrammarFile_Name);
+            try
+            {
+                regularGrammarFile_Name = "regularGrammar.txt";
+                // Getting relative path to class of regularGrammar.txt [1^]
+                var asm = Assembly.GetExecutingAssembly();
+                regularGrammarFile_Path = asm.GetManifestResourceStream(asm.GetManifestResourceNames().Single(file => file.EndsWith(regularGrammarFile_Name)));
+            }
+            catch (Exception e)
+            {
+                Debug.Debuger.Log(e.Message);
+                throw;
+            }
             //regularGrammarFile_Path = @$"Resources\{regularGrammarFile_Name}";
         }
 
@@ -41,19 +49,19 @@ namespace htmlInterpreter.Compiler
             // Read regular grammar file
             using (StreamReader sr = new StreamReader(regularGrammarFile_Path))
             {
-                while ((currentLineContent = sr.ReadLine().ToString()) != null)
+                while ((currentLineContent = sr.ReadLine()) != null)
                 {
                     string[] key_Val = currentLineContent.Split(',');
 
-                    switch (key_Val[1])     // Set type
+                    /*switch (key_Val[1])     // Set type
                     {
                         case "s":
                             LGrammar.Add(key_Val[0], Type.GetType("System.string"));
                             break;
                         default:
                             break;
-                    }
-                    lineCount++;
+                    }*/
+                    //lineCount++;
                 }
             }
         }

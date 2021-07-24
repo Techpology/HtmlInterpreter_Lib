@@ -16,6 +16,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="regularGrammar.txt" />
+    <None Remove="syntaxGrammar.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="regularGrammar.txt" />
+    <EmbeddedResource Include="syntaxGrammar.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
