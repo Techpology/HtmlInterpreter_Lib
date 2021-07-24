@@ -13,7 +13,7 @@ namespace htmlInterpreter.Compiler
         // Grammar dictionary
         public Dictionary<string, Type> LGrammar { get; set; }
 
-        string regularGrammarFile_Name { get; set; }        // File name and extension of the regular grammar file
+        public string regularGrammarFile_Name { get; set; } // File name and extension of the regular grammar file
         public string regularGrammarFile_Path { get; set; } // Can be changed for different grammar set (same syntax)
 
         // Constructor
