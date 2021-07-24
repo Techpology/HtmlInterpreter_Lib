@@ -17,7 +17,7 @@ namespace htmlInterpreter.Compiler
         public string regularGrammarFile_Path { get; set; } // Can be changed for different grammar set (same syntax)
 
         // Constructor
-        HTMLi_Lgrammar()
+        public HTMLi_Lgrammar()
         {
             LGrammar = new Dictionary<string, Type>();
 
@@ -30,15 +30,30 @@ namespace htmlInterpreter.Compiler
         // Deconstructor
         ~HTMLi_Lgrammar()
         {
-
+            
         }
 
-        void setLGrammar()
+        public void setLGrammar()
         {
+            int lineCount = 0;  // Increments with each line read
+            string currentLineContent;
             // Read regular grammar file
             using (StreamReader sr = new StreamReader(regularGrammarFile_Path))
             {
+                while ((currentLineContent = sr.ReadLine()) != null)
+                {
+                    string[] key_Val = currentLineContent.Split(',');
 
+                    switch (key_Val[1])     // Set type
+                    {
+                        case "s":
+                            LGrammar.Add(key_Val[0], Type.GetType("System.string"));
+                            break;
+                        default:
+                            break;
+                    }
+                    lineCount++;
+                }
             }
         }
 
