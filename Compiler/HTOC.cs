@@ -26,7 +26,7 @@ namespace htmlInterpreter.Compiler
             get_regularGrammar.setLGrammar();               // Set grammar
 
             get_syntaxGrammar = new HTMLi_SyntaxGrammar();
-            //get_syntaxGrammar.setSyntaxGrammar();           // Set syntax
+            get_syntaxGrammar.setSyntaxGrammar();           // Set syntax
         }
 
         public static string toHex(char a)

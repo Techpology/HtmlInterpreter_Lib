@@ -33,7 +33,6 @@ namespace htmlInterpreter.Compiler
                 Debug.Debuger.Log(e.Message);
                 throw;
             }
-            //regularGrammarFile_Path = @$"Resources\{regularGrammarFile_Name}";
         }
 
         // Deconstructor
@@ -53,15 +52,15 @@ namespace htmlInterpreter.Compiler
                 {
                     string[] key_Val = currentLineContent.Split(',');
 
-                    /*switch (key_Val[1])     // Set type
+                    switch (key_Val[1])     // Set type
                     {
                         case "s":
                             LGrammar.Add(key_Val[0], Type.GetType("System.string"));
                             break;
                         default:
                             break;
-                    }*/
-                    //lineCount++;
+                    }
+                    lineCount++;
                 }
             }
         }

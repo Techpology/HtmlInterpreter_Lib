@@ -29,7 +29,6 @@ namespace htmlInterpreter.Compiler
                 Debug.Debuger.Log(e.Message);
                 throw;
             }
-            //syntaxGrammar_Path += @$"Resources\{syntaxGrammar_Name}";
         }
 
         ~HTMLi_SyntaxGrammar()
