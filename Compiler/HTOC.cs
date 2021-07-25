@@ -93,32 +93,38 @@ namespace htmlInterpreter.Compiler
             {
                 foreach (char L in line)
                 {
+                    Debug.Debuger.Logged += "\n, letter running " + L + " ";
+                    Debug.Debuger.Logged += "\n, Hex " + toHex(L) + " ";
                     if (!start && !stop && isInstruct(L)) // If no instruction is defined and the letter is a syntax
                     {
                         if (get_syntaxGrammar.syntaxGrammar.ContainsKey(L.ToString()))
                         {
                             string t = executeInstruction(get_syntaxGrammar.syntaxGrammar.GetValueOrDefault(L.ToString()));
+                            Debug.Debuger.Logged += "\n, instruct returned " + t + " ";
                             start = (t == "start");
                             stop = (t == "stop");
                             op_eq = (t == "op_eq");
                             op_str = (t == "op_str");
                         }
                     }
-                    else if (start && !op_eq && !op_str && !isInstruct(L) && setType)
+                    else if (start && !stop && !op_eq && !op_str && !isInstruct(L) && setType)
                     {
-                        if (toHex(L) != "20")
+                        Debug.Debuger.Logged += "\n, running second sect returned " + toHex(L) + " ";
+                        if (toHex(L) != "32")
                         {
                             type += L;
                         }
                         else
                         {
+                            Debug.Debuger.Logged += "\n, letter was empty ";
+                            Debug.Debuger.Logged += "\n, sending (a,type) instruct ";
                             executeInstruction("a", type); // Set Tag name
                             setType = false;
                         }
                     }
                     else if (start && !op_eq && !op_str && !isInstruct(L) && !setType && setArg)
                     {
-                        if (toHex(L) != "20")
+                        if (toHex(L) != "32")
                         {
                             arg += L;
                         }
@@ -127,6 +133,7 @@ namespace htmlInterpreter.Compiler
                     {
                         if (get_syntaxGrammar.syntaxGrammar.ContainsKey(L.ToString()))
                         {
+                            Debug.Debuger.Logged += "\n, equal operator ";
                             string t = executeInstruction(get_syntaxGrammar.syntaxGrammar.GetValueOrDefault(L.ToString()));
                             start = (t == "start");
                             stop = (t == "stop");
@@ -138,6 +145,7 @@ namespace htmlInterpreter.Compiler
                     {
                         if (get_syntaxGrammar.syntaxGrammar.ContainsKey(L.ToString()))
                         {
+                            Debug.Debuger.Logged += "\n, start str ";
                             string t = executeInstruction(get_syntaxGrammar.syntaxGrammar.GetValueOrDefault(L.ToString()));
                             start = (t == "start");
                             stop = (t == "stop");
@@ -149,7 +157,8 @@ namespace htmlInterpreter.Compiler
                     }
                     else if (start && op_eq && op_str && !isInstruct(L) && !setType && !setArg) // set argVal
                     {
-                        if(toHex(L) != "20")
+                        Debug.Debuger.Logged += "\n, set to argval " + argVal;
+                        if (toHex(L) != "32")
                         {
                             argVal += L;
                         }
@@ -158,13 +167,15 @@ namespace htmlInterpreter.Compiler
                     {
                         if (get_syntaxGrammar.syntaxGrammar.ContainsKey(L.ToString()))
                         {
+                            Debug.Debuger.Logged += "\n, end str ";
                             string t = executeInstruction(get_syntaxGrammar.syntaxGrammar.GetValueOrDefault(L.ToString()));
                             start = (t == "start");
                             stop = (t == "stop");
                             op_eq = (t == "op_eq");
                             op_str = (t != "op_str");
 
-                            setArg = (!op_str);
+                            setArg = (op_str);
+                            executeInstruction("b", arg, argVal);
                         }
                     }
                     else if(isInstruct(L) && start && !stop && !op_eq && !op_str && !setType && !setArg)
@@ -190,8 +201,8 @@ namespace htmlInterpreter.Compiler
             return new Node();  //Error
         }
 
-        static string[] std_nInstruct = { "61", "62", "63", "64", "65", "66", "67", "68", "69" , "6a", "6b", "6c", "6d", "6e", "6f",
-        "70", "71", "72", "73", "74", "75", "76", "77", "78", "79" , "7a", "20"};
+        static string[] std_nInstruct = { "97", "98", "99", "100", "101", "102", "103", "104", "105" , "106", "107", "108", "109", "110", "111",
+        "112", "113", "114", "115", "116", "117", "118", "119", "120", "121" , "122", "123", "32"};
 
         static bool isInstruct(char _l)
         {
@@ -205,19 +216,21 @@ namespace htmlInterpreter.Compiler
             return true;
         }
 
-        static List<Node> NodesCompiled = new List<Node>();
+        public static List<Node> NodesCompiled = new List<Node>();
         static Tag TagCompiling;
         static Node NodeCompiling;
 
-        public static string executeInstruction(string _instructNum, string arg = "")
+        public static string executeInstruction(string _instructNum, string arg = "", string argVal = "")
         {
             switch (_instructNum)
             {
                 case "0":
+                    Debug.Debuger.Logged += "\n, starting (0) ";
                     TagCompiling = new Tag();
                     NodeCompiling = new Node();
                     return "start";
                 case "1":
+                    Debug.Debuger.Logged += "\n, ending (1) ";
                     NodeCompiling.tag = TagCompiling;
                     NodesCompiled.Add(NodeCompiling);
                     break;
@@ -226,9 +239,22 @@ namespace htmlInterpreter.Compiler
                 case "3":
                     return "op_str";
                 case "a":
+                    Debug.Debuger.Logged += "\n, can assign tagname? ";
                     if (get_regularGrammar.LGrammar.ContainsKey(arg))
                     {
+                        Debug.Debuger.Logged += "\n, assigned tagname ";
                         TagCompiling.tagName = arg;
+                    }
+                    break;
+                case "b":
+                    Debug.Debuger.Logged += "\n, can assign Arg? " + arg;
+                    if (get_regularGrammar.LGrammar.ContainsKey(arg))
+                    {
+                        Debug.Debuger.Logged += "\n, assigned " + arg;
+                        if(arg == "style")
+                        {
+                            TagCompiling.Style = argVal;
+                        }
                     }
                     break;
                 default:

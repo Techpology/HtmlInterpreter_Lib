@@ -20,7 +20,7 @@ namespace htmlInterpreter.Compiler
 
             try
             {
-                syntaxGrammar_Name = "htmlInterpreter.Properties.Resources.resources.syntaxGrammar.txt";
+                syntaxGrammar_Name = "syntaxGrammar.txt";
                 var asm = Assembly.GetExecutingAssembly();
                 syntaxGrammar_Path = asm.GetManifestResourceStream(asm.GetManifestResourceNames().Single(file => file.EndsWith(syntaxGrammar_Name)));
             }
@@ -42,7 +42,7 @@ namespace htmlInterpreter.Compiler
             string CurrentLine;
             using (StreamReader sr = new StreamReader(syntaxGrammar_Path))
             {
-                while ((CurrentLine = sr.ReadLine().ToString()) != null)
+                while ((CurrentLine = sr.ReadLine()) != null)
                 {
                     string[] key_val = CurrentLine.Split(" ");
 
@@ -52,5 +52,6 @@ namespace htmlInterpreter.Compiler
                 }
             }
         }
+
     }
 }
