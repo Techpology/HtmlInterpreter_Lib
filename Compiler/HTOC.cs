@@ -107,7 +107,7 @@ namespace htmlInterpreter.Compiler
                             op_str = (t == "op_str");
                         }
                     }
-                    else if (start && !stop && !op_eq && !op_str && !isInstruct(L) && setType)
+                    else if (start && !stop && !op_eq && !op_str && !isInstruct(L) && setType && setArg)
                     {
                         Debug.Debuger.Logged += "\n, running second sect returned " + toHex(L) + " ";
                         if (toHex(L) != "32")
@@ -124,8 +124,10 @@ namespace htmlInterpreter.Compiler
                     }
                     else if (start && !op_eq && !op_str && !isInstruct(L) && !setType && setArg)
                     {
+                        Debug.Debuger.Logged += "\n, letter " + L + " is an argument";
                         if (toHex(L) != "32")
                         {
+                            Debug.Debuger.Logged += "\n, adding to arg ";
                             arg += L;
                         }
                     }
@@ -135,10 +137,9 @@ namespace htmlInterpreter.Compiler
                         {
                             Debug.Debuger.Logged += "\n, equal operator ";
                             string t = executeInstruction(get_syntaxGrammar.syntaxGrammar.GetValueOrDefault(L.ToString()));
-                            start = (t == "start");
-                            stop = (t == "stop");
+                            Debug.Debuger.Logged += "\n, instruct returned " + t;
                             op_eq = (t == "op_eq");
-                            op_str = (t == "op_str");
+                            op_str = false;
                         }
                     }
                     else if (start && op_eq && !op_str && isInstruct(L) && !setType && setArg) // start argVal
@@ -147,48 +148,33 @@ namespace htmlInterpreter.Compiler
                         {
                             Debug.Debuger.Logged += "\n, start str ";
                             string t = executeInstruction(get_syntaxGrammar.syntaxGrammar.GetValueOrDefault(L.ToString()));
-                            start = (t == "start");
-                            stop = (t == "stop");
+                            Debug.Debuger.Logged += "\n, instruct returned " + t;
                             op_eq = (t == "op_eq");
                             op_str = (t == "op_str");
 
-                            setArg = (!op_str);
+                            setArg = false;
+                            Debug.Debuger.Logged += "\n, bool values: " + start.ToString() + stop.ToString() + op_eq.ToString() + op_str.ToString() + setArg.ToString();
                         }
                     }
-                    else if (start && op_eq && op_str && !isInstruct(L) && !setType && !setArg) // set argVal
+                    else if (start && !stop && !op_eq && op_str && !isInstruct(L) && !setType && !setArg) // set argVal
                     {
                         Debug.Debuger.Logged += "\n, set to argval " + argVal;
                         if (toHex(L) != "32")
                         {
+                            Debug.Debuger.Logged += "\n, setting " + L + " to argval";
                             argVal += L;
                         }
                     }
-                    else if (start && op_eq && op_str && isInstruct(L) && !setType && !setArg) // end argVal
+                    else if (start && !stop && !op_eq && op_str && isInstruct(L) && !setType && !setArg) // end argVal
                     {
                         if (get_syntaxGrammar.syntaxGrammar.ContainsKey(L.ToString()))
                         {
                             Debug.Debuger.Logged += "\n, end str ";
                             string t = executeInstruction(get_syntaxGrammar.syntaxGrammar.GetValueOrDefault(L.ToString()));
-                            start = (t == "start");
-                            stop = (t == "stop");
-                            op_eq = (t == "op_eq");
-                            op_str = (t != "op_str");
+                            op_str = false;
 
-                            setArg = (op_str);
+                            setArg = true;
                             executeInstruction("b", arg, argVal);
-                        }
-                    }
-                    else if(isInstruct(L) && start && !stop && !op_eq && !op_str && !setType && !setArg)
-                    {
-                        if (get_syntaxGrammar.syntaxGrammar.ContainsKey(L.ToString()))
-                        {
-                            string t = executeInstruction(get_syntaxGrammar.syntaxGrammar.GetValueOrDefault(L.ToString()));
-                            start = (t == "start");
-                            stop = (t == "stop");
-                            op_eq = (t == "op_eq");
-                            op_str = (t == "op_str");
-
-                            setArg = (!op_str);
                         }
                     }
                 }
@@ -254,6 +240,9 @@ namespace htmlInterpreter.Compiler
                         if(arg == "style")
                         {
                             TagCompiling.Style = argVal;
+                        }else if(arg == "class")
+                        {
+                            TagCompiling.Class = argVal;
                         }
                     }
                     break;
