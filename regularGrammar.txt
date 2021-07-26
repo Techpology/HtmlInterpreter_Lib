@@ -11,3 +11,4 @@ h5,s
 p,s
 style,s
 class,s
+id,s
