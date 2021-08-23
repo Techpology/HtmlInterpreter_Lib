@@ -11,9 +11,9 @@ using htmlInterpreter.Caching;
 using htmlInterpreter.Components;
 using htmlInterpreter.Debug;
 
-[Obsolete("Reverting to C based compiler using AnonymousPipes")]
 namespace htmlInterpreter.Compiler
 {
+    [Obsolete("Reverting to C based compiler using ")]
     public static class HTOC
     {
         // Create a dictionary with <string(key), Type(Value[int,string,char,etc...])>
