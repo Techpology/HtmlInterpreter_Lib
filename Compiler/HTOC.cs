@@ -11,6 +11,7 @@ using htmlInterpreter.Caching;
 using htmlInterpreter.Components;
 using htmlInterpreter.Debug;
 
+[Obsolete("Reverting to C based compiler using AnonymousPipes")]
 namespace htmlInterpreter.Compiler
 {
     public static class HTOC
