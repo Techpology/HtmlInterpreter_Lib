@@ -9,13 +9,14 @@ using System.Diagnostics;
 
 namespace htmlInterpreter.Compiler.Pipes
 {
+    [Obsolete("Depricated, switching to C# based instead of using pipes with C based parser")]
     public static class AnonymousPipe_Server
     {
         public static void Main()
         {
             Process pipeClient = new Process();
 
-            pipeClient.StartInfo.FileName = "PipeClient.exe";
+            pipeClient.StartInfo.FileName = "lexer.exe";
 
             using (AnonymousPipeServerStream pipeServer = new AnonymousPipeServerStream(PipeDirection.Out, HandleInheritability.Inheritable))
             {
