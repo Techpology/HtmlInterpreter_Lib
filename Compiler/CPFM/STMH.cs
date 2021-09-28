@@ -9,7 +9,7 @@ namespace htmlInterpreter.Compiler.CPFM
 {
     public static class STMH
     {
-        // Virgin strlen: long, heavy, made by a high level programmer
+        //- - - Virgin strlen: long, heavy, made by a high level programmer - - -
         /*
         public static unsafe int strlen(byte* ptrTarget)
         {
@@ -31,7 +31,7 @@ namespace htmlInterpreter.Compiler.CPFM
         */
         
         
-        // Chad cStrLen B): Thank me later 
+        // <======> Chad cStrLen B): Based, short, sexy, optimized <=======>
         public static unsafe int cStrLen(byte* str)
         {
             if (str == (byte*)0) return 0;
