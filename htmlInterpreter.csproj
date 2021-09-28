@@ -13,6 +13,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile> DocumentationXml\htmlInterpreter.xml</DocumentationFile>
     <OutputPath></OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,6 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Compiler\CPFM\Vanilla\" />
     <Folder Include="Properties\" />
   </ItemGroup>
 
