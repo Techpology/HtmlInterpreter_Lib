@@ -35,7 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Compiler\CPFM\Vanilla\" />
     <Folder Include="Properties\" />
   </ItemGroup>
 
