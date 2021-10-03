@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
+// Std Memory Handler
 namespace htmlInterpreter.Compiler.CPFM
 {
     public static class STMH
