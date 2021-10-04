@@ -33,10 +33,53 @@ namespace htmlInterpreter.Compiler.CPFM.Vanilla
         static List<string> lines { get; set; }
         static string filePath { get; set; }
 
+        struct _retFromC
+        {
+            public IntPtr tags;
+            public uint sizeOfList;
+        }
+
+        struct _retToCS
+        {
+            public List<Tag> tags;
+            public int sizeOfList;
+        }
+
         public static List<Node> VanillaParse()
         {
             List<Node> _ret = new List<Node>();
-            CTag.cTag _tempTag = (CTag.cTag)Marshal.PtrToStructure(cPtr, typeof(CTag.cTag));
+
+            _retFromC _tempStructFromC = (_retFromC)Marshal.PtrToStructure(cPtr, typeof(_retFromC));
+
+            Debug.Debuger.Log("\n" + _tempStructFromC.sizeOfList.ToString());
+
+            _retToCS _toCs = new _retToCS();
+            _toCs.tags = new List<Tag>();
+
+            for (int i = 0; i < Convert.ToInt32(_tempStructFromC.sizeOfList); i++)
+            {
+                unsafe
+                {
+                    Debug.Debuger.Log("\n" + _tempStructFromC.tags + (i * sizeof(CTag.cTag)));
+                    CTag.cTag _tempTag = (CTag.cTag)Marshal.PtrToStructure(_tempStructFromC.tags + (i * sizeof(CTag.cTag)), typeof(CTag.cTag));
+
+                    byte[] arr = new byte[STMH.strlen(_tempTag.tagName)];
+                    Marshal.Copy((IntPtr)_tempTag.tagName, arr, 0, STMH.strlen(_tempTag.tagName));
+                    string _str_TagName = System.Text.Encoding.Default.GetString(arr);
+
+                    Tag _Tag = new Tag();
+                    _Tag.tagName = _str_TagName;
+
+                    _toCs.tags.Add(_Tag);
+                    Node _tempNode = new Node(_Tag);
+                    _ret.Add(_tempNode);
+                    Debug.Debuger.Log("\n" + _Tag.tagName);
+                }
+            }
+
+            Debug.Debuger.Log("\n length of ret" + _ret.Count.ToString());
+
+            /*CTag.cTag _tempTag = (CTag.cTag)Marshal.PtrToStructure(cPtr, typeof(CTag.cTag));
 
             unsafe
             {
@@ -49,7 +92,7 @@ namespace htmlInterpreter.Compiler.CPFM.Vanilla
 
                 Node _x = new Node(_Tag);
                 _ret.Add(_x);
-            }
+            }*/
 
             return _ret;
         }
@@ -80,6 +123,5 @@ namespace htmlInterpreter.Compiler.CPFM.Vanilla
             }
             return toRet;
         }
-
     }
 }

@@ -10,7 +10,7 @@ namespace htmlInterpreter.Debug
     {
         public static void Log(string _toLog)
         {
-            Logged = _toLog;
+            Logged += _toLog;
         }
 
         public static string Logged { get; set; }
