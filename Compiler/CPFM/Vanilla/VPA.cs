@@ -67,7 +67,7 @@ namespace htmlInterpreter.Compiler.CPFM.Vanilla
                     Marshal.Copy((IntPtr)_tempTag.tagName, arr, 0, STMH.strlen(_tempTag.tagName));
                     string _str_TagName = System.Text.Encoding.Default.GetString(arr);
 
-                    if(_tempTag.args != null)
+                    /*if(_tempTag.args != null)
                     {
                         byte[] _arg = new byte[STMH.strlen(_tempTag.args)];
                         Marshal.Copy((IntPtr)_tempTag.args, arr, 0, STMH.strlen(_tempTag.args));
@@ -85,7 +85,7 @@ namespace htmlInterpreter.Compiler.CPFM.Vanilla
                         _ret.Add(_tempNode);
                     }
                     else
-                    {
+                    {*/
                         Tag _Tag = new Tag();
                         _Tag.tagName = _str_TagName;
 
@@ -94,7 +94,7 @@ namespace htmlInterpreter.Compiler.CPFM.Vanilla
 
                         Debug.Debuger.Log("\n" + _Tag.tagName);
                         _ret.Add(_tempNode);
-                    }
+                    //}
 
 
                 }
