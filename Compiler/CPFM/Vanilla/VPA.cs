@@ -7,12 +7,13 @@ using System.Runtime.InteropServices;
 using htmlInterpreter.Compiler.CPFM;
 using htmlInterpreter.Components;
 using System.IO;
+using htmlInterpreter.Interactive.RunTimeHandling;
 
 namespace htmlInterpreter.Compiler.CPFM.Vanilla
 {
     public static class VPA
     {
-        [DllImport("vanilla.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("vcp.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr getTags([MarshalAs(UnmanagedType.LPUTF8Str)] string _ToParse);
         static IntPtr cPtr;
 
@@ -23,11 +24,11 @@ namespace htmlInterpreter.Compiler.CPFM.Vanilla
 
             /* --------------------------------------------------------- */
 
-            Debug.Debuger.Log("getting C pointer to initiate Vanilla parser");
+            Debug.Debuger.Log("\ngetting C pointer to initiate Vanilla parser");
             fileToLines();
             cPtr = getTags(ListToStr(lines));
 
-            Debug.Debuger.Log($"C pointer grabbed succesfully: {(IntPtr)cPtr}");
+            Debug.Debuger.Log($"\nC pointer grabbed succesfully: {(IntPtr)cPtr}");
         }
 
         static List<string> lines { get; set; }
@@ -79,22 +80,7 @@ namespace htmlInterpreter.Compiler.CPFM.Vanilla
 
             Debug.Debuger.Log("\n length of ret" + _ret.Count.ToString());
 
-            /*CTag.cTag _tempTag = (CTag.cTag)Marshal.PtrToStructure(cPtr, typeof(CTag.cTag));
-
-            unsafe
-            {
-                byte[] arr = new byte[STMH.strlen(_tempTag.tagName)];
-                Marshal.Copy((IntPtr)_tempTag.tagName, arr, 0, STMH.strlen(_tempTag.tagName));
-                string _str_TagName = System.Text.Encoding.Default.GetString(arr);
-
-                Tag _Tag = new Tag();
-                _Tag.tagName = _str_TagName;
-
-                Node _x = new Node(_Tag);
-                _ret.Add(_x);
-            }*/
-
-            return _ret;
+            _Nodes_Active._CurrentNodes = _ret;
         }
 
         static void fileToLines()
