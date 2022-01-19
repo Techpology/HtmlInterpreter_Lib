@@ -68,13 +68,36 @@ namespace htmlInterpreter.Compiler.CPFM.Vanilla
                     Marshal.Copy((IntPtr)_tempTag.tagName, arr, 0, STMH.strlen(_tempTag.tagName));
                     string _str_TagName = System.Text.Encoding.Default.GetString(arr);
 
-                    Tag _Tag = new Tag();
-                    _Tag.tagName = _str_TagName;
+                    /*if(_tempTag.args != null)
+                    {
+                        byte[] _arg = new byte[STMH.strlen(_tempTag.args)];
+                        Marshal.Copy((IntPtr)_tempTag.args, arr, 0, STMH.strlen(_tempTag.args));
+                        string _str_args = System.Text.Encoding.Default.GetString(arr);
 
-                    _toCs.tags.Add(_Tag);
-                    Node _tempNode = new Node(_Tag);
-                    _ret.Add(_tempNode);
-                    Debug.Debuger.Log("\n" + _Tag.tagName);
+                        Tag _Tag = new Tag();
+                        _Tag.tagName = _str_TagName;
+                        _Tag.args = _str_args;
+
+                        _toCs.tags.Add(_Tag);
+                        Node _tempNode = new Node(_Tag);
+
+                        Debug.Debuger.Log("\nTag" + _Tag.tagName);
+                        Debug.Debuger.Log("\nargument: " + _Tag.args);
+                        _ret.Add(_tempNode);
+                    }
+                    else
+                    {*/
+                        Tag _Tag = new Tag();
+                        _Tag.tagName = _str_TagName;
+
+                        _toCs.tags.Add(_Tag);
+                        Node _tempNode = new Node(_Tag);
+
+                        Debug.Debuger.Log("\n" + _Tag.tagName);
+                        _ret.Add(_tempNode);
+                    //}
+
+
                 }
             }
 

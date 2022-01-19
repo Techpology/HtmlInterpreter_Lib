@@ -13,6 +13,7 @@ namespace htmlInterpreter.Compiler.CPFM.Vanilla
             public int*     indexId { get; set; }
             public byte*    tagName { get; set; }
             public byte*    Text    { get; set; }
+            //public byte*    args    { get; set; }
         };
     }
 }
