@@ -3,3 +3,8 @@
 </p>
 
 <h2>Techpology HTMLi</h2>
+
+<p>
+  This project does not contain a license, meaning you can not redistribute the code in anyway commercial or private without permission.
+  
+</p>
