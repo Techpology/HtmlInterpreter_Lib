@@ -16,7 +16,7 @@ You can create entire web pages using c# classes with a fully working hierarchy 
 This is a key feature to our main new introduction to the industry which I will explain further in the upcoming section.
 
 Masterpage-singlepage approach:
-Our library comes with a prebuilt masterpage - singlepage system which means that you can have a design patters very similar to the one in ASP.net.
+Our library comes with a prebuilt masterpage - singlepage system which means that you can have a design pattern very similar to the one in ASP.net.
 Which then brings us to the pure html component system which brings in aspects from ReactJs to pure html using our assembler.
 
 STACS (STANDARD CACHING SYSTEM):
