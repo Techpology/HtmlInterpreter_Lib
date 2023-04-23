@@ -104,6 +104,7 @@ namespace htmlInterpreter.Compiler.CPFM.Vanilla
             Debug.Debuger.Log("\n length of ret" + _ret.Count.ToString());
 
             _Nodes_Active._CurrentNodes = _ret;
+            return _ret;
         }
 
         static void fileToLines()
