@@ -16,5 +16,16 @@ namespace htmlInterpreter.Parser
             this.type = type;
             this.value = value;
         }
+
+        public static string[] getTokenTypes(List<Token> _tokens)
+        {
+            List<string> ret = new List<string>();
+            foreach (var item in _tokens)
+            {
+                ret.Add(item.type);
+            }
+
+            return ret.ToArray();
+        }
     }
 }

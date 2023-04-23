@@ -19,6 +19,9 @@ namespace htmlInterpreter.Parser
         {
             public string[] syntax { get; set; }
             public string[] syntaxN { get; set; }
+            public string[][] grammar { get; set; }
+            public int[][] grammarV { get; set; }
+            public string[] grammarN { get; set; }
         }
 
         /* Lexer/Parser grammar */
@@ -52,6 +55,7 @@ namespace htmlInterpreter.Parser
                         stack.Clear();
                     }
                     int _i = (parserGrammar.syntax.Contains(_tli+_tli1)) ? Array.IndexOf(parserGrammar.syntax, _tli + _tli1) : Array.IndexOf(parserGrammar.syntax, _tli);
+                    i += (parserGrammar.syntax.Contains(_tli + _tli1)) ? 1 : 0;
                     Token _ts = new Token(parserGrammar.syntaxN[_i], parserGrammar.syntax[_i]);
                     tokens.Add(_ts);
                 }
@@ -68,5 +72,56 @@ namespace htmlInterpreter.Parser
 
             return tokens;
         }
+
+        public void parse(List<Token> _tokens)
+        {
+            List<Exec> _execs = new List<Exec>();
+            int index = 0;
+
+            while(true)
+            {
+                int range = 0;
+                for (int i = 0; i < parserGrammar.grammar.Length; i++)
+                {
+                    range = parserGrammar.grammar[i].Length;
+
+                    if(!(index + range > _tokens.Count))
+                    {
+                        Console.WriteLine("here");
+                        string _t = String.Join(",", Token.getTokenTypes(_tokens)[index..(index+range)]);
+                        string _p = String.Join(",", parserGrammar.grammar[i]);
+
+                        if(_t == _p)
+                        {
+                            Console.WriteLine($"found {_t}");
+                            Exec _e = new Exec(parserGrammar.grammarN[i]);
+                            for (int j = 0; j < parserGrammar.grammarV[i].Length; j++)
+                            {
+                                _e.vals.Add(_tokens[index + parserGrammar.grammarV[i][j]].value);
+                            }
+                            _execs.Add(_e);
+                            index += range;
+                            Console.WriteLine(index);
+                        }
+                    }
+                }
+
+                if (index >= _tokens.Count)
+                {
+                    Console.WriteLine("break 2");
+                    Console.WriteLine(_tokens.Count);
+                    Console.WriteLine(index);
+                    Console.WriteLine(index + range);
+                    break;
+                }
+            }
+            Console.WriteLine("ended while");
+
+            foreach (var item in _execs)
+            {
+                Console.WriteLine("exec: " + item.type + " - " + String.Join(" ",item.vals));
+            }
+        }
+
     }
 }
