@@ -1,4 +1,28 @@
 ﻿{
-  "syntax": ['<', '>', '/>', '"', "'", '='],
-  "syntaxN": [ "top", "tcl", "tcl", "str", "str", "eq" ]
+  "syntax": ['<', '>', "/>", "</", '"', "'", '=', " ", "\n", "\r", "\t"],
+  "syntaxN": ["top", "ten", "tscl", "tcl", "str", "str", "eq", "ws", "ws", "ws", "ws"],
+  "grammar": [
+	["ws"],
+	["top", "STR", "ws"],
+	["top", "STR"],
+	["tcl", "STR", "ten"],
+	["ten"],
+	["tscl"],
+
+	["STR","eq", "str"],
+	["STR", "ws"],
+	["STR", "str"],
+  ],
+  "grammarV": [[-1], [1], [1], [1], [-1], [-1], [0], [0], [0]],
+  "grammarN": [
+	"null",
+	"crt",
+	"crt",
+	"clt",
+	"ent",
+	"enst",
+	"carg",
+	"arg",
+	"earg"
+  ]
 }

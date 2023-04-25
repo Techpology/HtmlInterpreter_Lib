@@ -65,15 +65,10 @@ namespace htmlInterpreter.Parser
                 }
             }
 
-            foreach (Token token in tokens)
-            {
-                Console.WriteLine(token.type + " _:_ " + token.value);
-            }
-
             return tokens;
         }
 
-        public void parse(List<Token> _tokens)
+        public List<Exec> parse(List<Token> _tokens)
         {
             List<Exec> _execs = new List<Exec>();
             int index = 0;
@@ -87,13 +82,12 @@ namespace htmlInterpreter.Parser
 
                     if(!(index + range > _tokens.Count))
                     {
-                        Console.WriteLine("here");
+                        //Console.WriteLine("here");
                         string _t = String.Join(",", Token.getTokenTypes(_tokens)[index..(index+range)]);
                         string _p = String.Join(",", parserGrammar.grammar[i]);
 
                         if(_t == _p)
                         {
-                            Console.WriteLine($"found {_t}");
                             Exec _e = new Exec(parserGrammar.grammarN[i]);
                             for (int j = 0; j < parserGrammar.grammarV[i].Length; j++)
                             {
@@ -101,26 +95,22 @@ namespace htmlInterpreter.Parser
                             }
                             _execs.Add(_e);
                             index += range;
-                            Console.WriteLine(index);
                         }
                     }
                 }
 
                 if (index >= _tokens.Count)
                 {
-                    Console.WriteLine("break 2");
-                    Console.WriteLine(_tokens.Count);
-                    Console.WriteLine(index);
-                    Console.WriteLine(index + range);
                     break;
                 }
             }
-            Console.WriteLine("ended while");
 
             foreach (var item in _execs)
             {
                 Console.WriteLine("exec: " + item.type + " - " + String.Join(" ",item.vals));
             }
+
+            return _execs;
         }
 
     }
